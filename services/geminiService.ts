@@ -243,9 +243,11 @@ export const generatePlatingVisual = async (protocol: NeuralProtocol): Promise<s
       contents: `A Michelin-star plating of ${protocol.title}. High-fidelity food photography, overhead view, minimalist.`,
       config: { imageConfig: { aspectRatio: '16:9' } }
     }));
-    // Iterate through parts to find the image
-    const part = response.candidates?.[0]?.content.parts.find(p => p.inlineData);
-    return part ? `data:image/png;base64,${part.inlineData.data}` : '';
+    // Safely iterate through parts to find the image
+    const parts = response.candidates?.[0]?.content?.parts || [];
+    const imgPart = parts.find((p: any) => p?.inlineData?.data);
+    const data = imgPart?.inlineData?.data as string | undefined;
+    return data ? `data:image/png;base64,${data}` : '';
   } catch (err) { return ''; }
 };
 
@@ -258,9 +260,10 @@ export const generateDrinkVisual = async (drinkName: string): Promise<string> =>
       contents: `A professional studio photograph of a ${drinkName}. Elegant lighting, plain background.`,
       config: { imageConfig: { aspectRatio: '1:1' } }
     }));
-    // Iterate through parts to find the image
-    const part = response.candidates?.[0]?.content.parts.find(p => p.inlineData);
-    return part ? `data:image/png;base64,${part.inlineData.data}` : '';
+    const parts = response.candidates?.[0]?.content?.parts || [];
+    const imgPart = parts.find((p: any) => p?.inlineData?.data);
+    const data = imgPart?.inlineData?.data as string | undefined;
+    return data ? `data:image/png;base64,${data}` : '';
   } catch (err) { return ''; }
 };
 
@@ -273,9 +276,10 @@ export const generateIngredientVisual = async (ingredientName: string): Promise<
       contents: `A fresh, high-quality ${ingredientName} isolated on a clean white background. Food photography.`,
       config: { imageConfig: { aspectRatio: '1:1' } }
     }));
-    // Iterate through parts to find the image
-    const part = response.candidates?.[0]?.content.parts.find(p => p.inlineData);
-    return part ? `data:image/png;base64,${part.inlineData.data}` : '';
+    const parts = response.candidates?.[0]?.content?.parts || [];
+    const imgPart = parts.find((p: any) => p?.inlineData?.data);
+    const data = imgPart?.inlineData?.data as string | undefined;
+    return data ? `data:image/png;base64,${data}` : '';
   } catch (err) { return ''; }
 };
 
@@ -288,9 +292,10 @@ export const generateSchematic = async (protocol: NeuralProtocol): Promise<strin
       contents: `An architectural blueprint and deconstructed schematic of the dish ${protocol.title}. Technical drawing style.`,
       config: { imageConfig: { aspectRatio: '1:1' } }
     }));
-    // Iterate through parts to find the image
-    const part = response.candidates?.[0]?.content.parts.find(p => p.inlineData);
-    return part ? `data:image/png;base64,${part.inlineData.data}` : '';
+    const parts = response.candidates?.[0]?.content?.parts || [];
+    const imgPart = parts.find((p: any) => p?.inlineData?.data);
+    const data = imgPart?.inlineData?.data as string | undefined;
+    return data ? `data:image/png;base64,${data}` : '';
   } catch (err) { return ''; }
 };
 
