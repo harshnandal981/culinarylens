@@ -7,8 +7,8 @@ export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     const viteGeminiKey = env.VITE_GEMINI_API_KEY || env.GEMINI_API_KEY || '';
     return {
-      // For GitHub Pages under /culinarylens
-      base: '/culinarylens/',
+      // For GitHub Pages under /culinarylens; Vercel/Netlify use root (/)
+      base: process.env.GITHUB_PAGES === 'true' ? '/culinarylens/' : '/',
       server: {
         port: 3000,
         host: '0.0.0.0',
